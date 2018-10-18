@@ -1,5 +1,5 @@
 <!--Added HTML to resize image-->
-<img src = "/misc/newpaltzlogo.jpg" width="40%">
+<img src = "newpaltzlogo.jpg" width="40%">
 
 # Fall 2018 Web Programming Class
 
