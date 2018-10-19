@@ -17,9 +17,6 @@ class Interface{
         }
     }
 
-    deleteUser(id){
-
-    }
 }
 
 class User{
