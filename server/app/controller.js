@@ -47,7 +47,8 @@ app.post('/app/users', (req, res) => {
 		email: req.body.email,
 		profileImage: '',
 		pictures: [],
-		friends: [],
+        friends: [],
+        exercises: [],
 		posts: []	
 	};
 
@@ -115,7 +116,7 @@ app.put('/app/users/:id/friends', (req, res) => {
 
 	user.friends.push(req.body.id);
 	
-	res.send(user);	
+	res.send(user.friends);	
 });
 
 // Remove a Friend
@@ -141,25 +142,150 @@ app.post('/app/users/:id/posts', (req, res) => {
 
     var d = new Date();
     
-    interface.user.post.push(json.stringify({message: req.body.message, date: d.getTime(), sentBy: parseInt(req.params.id), privacy: req.body.privacy, id: user.posts.length + 1}));
+    interface.user.post.push(json.stringify({message: req.body.message, date: d.getTime(), sentBy: parseInt(req.params.id), privacy: req.body.privacy, postID: user.posts.length + 1, status: 'New'}));
 });
 
+// Update Message
 
+app.put('/app/users/:id/posts', (req, res) => {
+	const user = users.find(u => u.id === parseInt(req.params.id));
+    if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
+
+    const index = user.post.indexOf(req.body.post);
+    var d = Date();
+
+        if(index > -1){
+            user.posts[index].message = req.body.message;
+            user.posts[index].date = d.getTime();
+            user.posts[index].privacy = req.body.message;
+            user.posts[index].status = 'Edited';
+        };
+
+    res.send(user.posts);
+});
+
+// Delete Message
+
+app.delete('/app/users/:id/posts', (req, res) => {
+	const user = users.find(u => u.id === parseInt(req.params.id));
+    if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
+
+    const index = 0;
+
+    while(index<user.posts.length){
+        if(user.posts[index].postID == req.body.postID){
+            break;
+        };
+            index = index + 1; 
+    };
+    if(index < user.post.length){
+        user.post.splice(index, 1);
+    }
+    res.send(user.posts);
+});
+// Get All Messages
+
+app.get('/app/users/:id/posts', (req, res) => {
+	const user = users.find(u => u.id === parseInt(req.params.id));
+    if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
+
+    res.send(user.posts);
+
+});
 
 // Add Exercise
 
-app.post
+app.post('/app/users/:id/exercises', (req, res) => {
+	const user = users.find(u => u.id === parseInt(req.params.id));
+    if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
+
+    user.exercises.push(json.stringify({exerciseID: req.body.exerciseID, reps: [], sets: []}));
+
+    res.send(user.exercises);
+});
+
 
 // Update Exercise
 
+app.put('/app/users/:id/exercises', (req, res) => {
+	const user = users.find(u => u.id === parseInt(req.params.id));
+    if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
+
+    const index = user.exercises.indexOf(req.body.exerciseID);
+
+    if(index>-1){
+        user.exercise[index].reps.push(req.body.reps);
+        user.exercise[index].sets.push(req.body.sets);
+    };
+
+    res.send(user.exercises)
+});
+
 // Delete Exercise
 
+app.put('/app/users/:id/exercises', (req, res) => {
+	const user = users.find(u => u.id === parseInt(req.params.id));
+    if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
+
+    const index = user.exercises.indexOf(req.body.exerciseID);
+
+    if(index > -1) user.exercises.splice(index, 1);
+    else return res.status(400).send('Sorry, the exercise does not exist');
+
+    res.send(user.exercises);
+});
 // Get all Pictures
+
+app.get('/app/users/:id/pictures', (req, res) => {
+    const user = users.find(u => u.id === parseInt(req.params.id));
+    if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
+});
 
 // Add Picture
 
+app.post('/app/users/:id/pictures', (req, res) => {
+    const user = users.find(u => u.id === parseInt(req.params.id));
+    if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
+
+    if (!req.body.url) return res.status(400).send('Please Include a Picture');
+
+    user.pictures.push(json.stringify({url: req.body.url, photoID: user.pictures.length +1, isProfile: req.body.isProfile, privacy: req.body.privacy}));
+    
+    res.send(user.pictures);
+});
+
 // Remove Picture
 
+app.delete('/app/users/:id/pictures', (req, res) => {
+    const user = users.find(u => u.id === parseInt(req.params.id));
+    if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
+
+    if (!req.body.picture) return res.status(400).send('No Photo Selected');
+
+    const index = user.pictures.indexOf(req.body.picture);
+
+    if (index > -1) user.pictures.splice(index, 1);
+    else return res.status(400).send('Picture not found');
+
+    res.send(user.pictures);
+});
 // Update Picture
+
+app.put('/app/users/:id/pictures', (req, res) => {
+    const user = users.find(u => u.id === parseInt(req.params.id));
+    
+    if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
+    if (!req.body.picture) return res.status(400).send('No Picture Selected');
+
+   const index = user.pictures.indexOf(req.body.picture);
+
+   if(index>-1) {
+        user.pictures[index].privacy = req.body.privacy;
+        user.pictures[index].isProfile = req.body.isProfile;
+   }
+   else return res.status(400).send('Picture not found');
+    
+    res.send(user.pictures);
+});
 
 module.exports = app;
