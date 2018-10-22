@@ -31,42 +31,25 @@ app.get('/app/users/:id', (req, res) => {
 
 app.post('/app/users', (req, res) => {
 
-	if(!req.body.email || !req.body.f_name || !req.body.l_name || !req.body.age || !req.body.height || !req.body.gender) {
+    if(!req.body.email || !req.body.password || !req.body.f_name || !req.body.l_name || !req.body.gender) {
 		// 400 Bad Request
 		res.status(400).send('Sorry, Something seems to be missing');
 		return;
-	};
-
-	const user = {
-		id: interface.users.length + 1,
-		f_name: req.body.f_name,
-		l_name: req.body.l_name,
-		age: req.body.age,
-		height: req.body.height,
-		gender: req.body.gender,
-		email: req.body.email,
-		profileImage: '',
-		pictures: [],
-        friends: [],
-        exercises: [],
-		posts: []	
-	};
-
-	interface.addUser(user);
+    };   
+	const user = interface.addUser(req.body.f_name, req.body.l_name, req.body.gender, req.body.email, req.body.password);
 	res.send(user);	
 });
 
 // Update User information
 
 app.put('/app/users/:id', (req, res) => {
-
 	const user = users.find(u => u.id === parseInt(req.params.id));
-	if(!user) res.status(404).send('Sorry, This User Does Not Exist');
-
-	if(!req.body.email || !req.body.f_name || !req.body.l_name || !req.body.age || !req.body.height || !req.body.gender) {
-	// 400 Bad Request
-	res.status(400).send('Sorry, Something seems to be missing');	
-	return;
+    
+    if(!user) res.status(404).send('Sorry, This User Does Not Exist');
+	if(!req.body.email || !req.body.password || !req.body.f_name || !req.body.l_name || !req.body.age || !req.body.height || !req.body.gender) {
+	    // 400 Bad Request
+	    res.status(400).send('Sorry, Something seems to be missing');	
+	    return;
 	};
 
 	user.f_name = req.body.f_name;
@@ -74,7 +57,8 @@ app.put('/app/users/:id', (req, res) => {
 	user.age = req.body.age;
 	user.height = req.body.height;
 	user.gender = req.body.gender;
-	user.email = req.body.email;
+    user.email = req.body.email;
+    user.password = req.body.password;
 
 	res.send(user);	
 	

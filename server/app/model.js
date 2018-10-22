@@ -2,24 +2,37 @@
 class Interface{
 
     constructor() {
-        this.users = []
+		this.users = [];
+		this.count = 0;
     }
 
-    addUser(user) {
-       return this.users.push(user);
-    }
-
-    getUser(id){
-        for(var i=0; i<this.users.length; i++){
-            if(this.users[i].id == id){
-                return this.users[i];
-            }
-        }
-    }
-
-
+    addUser(f_name, l_name, gender, email, password) {
+       this.users.push(new User(this.setID(), f_name, l_name, gender, email, password));
+	}
+	
+	setID() {
+		return this.count++;
+	}
 }
 
+class User {
+	
+	constructor(id, f_name, l_name, gender, email, password) {
+		id: id;
+		f_name: f_name;
+		l_name: l_name;
+		age: '';
+		height: '';
+		password: password;
+		gender: gender;
+		email: email;
+		profileImage: '';
+		pictures: [];
+        friends: [];
+        exercises: [];
+		posts: [];	
+	};
+}
 module.exports = {
-    Interface
+    Interface, User
 }
