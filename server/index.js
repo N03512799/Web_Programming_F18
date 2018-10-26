@@ -10,6 +10,7 @@ const server = "localhost";
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use("/", express.static(__dirname + "/../client/"));
+app.use("/users", gui);
 
 app.listen(port);
 

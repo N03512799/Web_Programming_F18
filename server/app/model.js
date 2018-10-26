@@ -6,8 +6,10 @@ class Interface{
 		this.currentUser = '';
     }
 
-    	addUser(f_name, l_name, gender, email, password) {
-       		this.users.push(new User(this.setID(), f_name, l_name, gender, email, password));
+    addUser(f_name, l_name, gender, email, password) {
+			const user = new User(this.setID(), f_name, l_name, gender, email, password)   
+			this.users.push(user);
+			return user;
 	}
 
 	findUser(id){
@@ -15,7 +17,7 @@ class Interface{
 	}
 	
 	setID() {
-		return this.count++;
+		return this.userCount++;
 	}
 
 	checkLogIn(email, password){
@@ -31,22 +33,22 @@ class Interface{
 class User {
 	
 	constructor(id, f_name, l_name, gender, email, password) {
-		id: id;
-		f_name: f_name;
-		l_name: l_name;
-		age: '';
-		height: '';
-		password: password;
-		gender: gender;
-		email: email;
-		profileImage: '';
-		privacy: 'public';
-		pictures: [];
-        friends: [];
-        exercises: [];
-		posts: [];
-		postCount: 0;
-		pictureCount: 0;	
+		this.id = id;
+		this.f_name = f_name;
+		this.l_name = l_name;
+		this.age = '';
+		this.height = '';
+		this.password = password;
+		this.gender = gender;
+		this.email = email;
+		this.profileImage = '';
+		this.privacy = 'public';
+		this.pictures = [];
+        this.friends = [];
+        this.exercises = [];
+		this.posts = [];
+		this.postCount = 0;
+		this.pictureCount = 0;	
 	};
 
 	setPostID(){

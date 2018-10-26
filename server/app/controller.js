@@ -1,10 +1,10 @@
 const express = require('express');
-const {Interface} = require('./model');
+const {Interface, User} = require('./model');
 
 var interface = new Interface();
 
 const app = express.Router();
-
+ 
 // allow JSON parsing 
 app.use(express.json());
 
@@ -25,13 +25,13 @@ app.get('/login', (req, res) => {
 
 // Get List of all Users
 
-app.get('/app/users', (req, res) => {
-	res.send(interface.users);
+app.get('/users', (req, res) => {
+	res.send(interface);
 });
 
 // Display Individual User Data
 
-app.get('/app/users/:id', (req, res) => {
+app.get('/users/:id', (req, res) => {
 
 	const user = interface.findUser(parseInt(req.params.id));
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
@@ -41,20 +41,15 @@ app.get('/app/users/:id', (req, res) => {
 
 // Add new User
 
-app.post('/app/users', (req, res) => {
-
-    if(!req.body.email || !req.body.password || !req.body.f_name || !req.body.l_name || !req.body.gender) {
-	// 400 Bad Request
-	res.status(400).send('Sorry, Something seems to be missing');
-	return;
-    };   
+app.post('/newUser', (req, res) => {
+	
 	const user = interface.addUser(req.body.f_name, req.body.l_name, req.body.gender, req.body.email, req.body.password);
 	res.send(user);	
-});
+})
 
 // Update User information
 
-app.put('/app/users/:id', (req, res) => {
+app.put('/users/:id', (req, res) => {
 	const user = interface.findUser(parseInt(req.params.id));
     
     if(!user) res.status(404).send('Sorry, This User Does Not Exist');
@@ -69,8 +64,8 @@ app.put('/app/users/:id', (req, res) => {
 	user.age = req.body.age;
 	user.height = req.body.height;
 	user.gender = req.body.gender;
-    	user.email = req.body.email;
-    	user.password = req.body.password;
+	user.email = req.body.email;
+	user.password = req.body.password;
 	user.privacy = req.body.privacy;
 
 	res.send(user);	
@@ -79,7 +74,7 @@ app.put('/app/users/:id', (req, res) => {
 
 // Delete User
 
-app.delete('/app/users/:id', (req, res) => {
+app.delete('/users/:id', (req, res) => {
 
 	const user = interface.findUser(parseInt(req.params.id));
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
@@ -93,7 +88,7 @@ app.delete('/app/users/:id', (req, res) => {
 
 // Get All Friends
 
-app.get('/app/users/:id/friends', (req, res) => {
+app.get('/users/:id/friends', (req, res) => {
 	
 	const user = interface.findUser(parseInt(req.params.id));
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
@@ -103,7 +98,7 @@ app.get('/app/users/:id/friends', (req, res) => {
 
 // Add a Friend
 
-app.put('/app/users/:id/friends', (req, res) => {
+app.put('/users/:id/friends', (req, res) => {
 	const user = interface.findUser(parseInt(req.params.id));
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
@@ -114,7 +109,7 @@ app.put('/app/users/:id/friends', (req, res) => {
 
 // Remove a Friend
 
-app.delete('/app/users/:id/friends', (req, res) => {
+app.delete('/users/:id/friends', (req, res) => {
 	const user = interface.findUser(parseInt(req.params.id));
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
@@ -129,7 +124,7 @@ app.delete('/app/users/:id/friends', (req, res) => {
 
 // Post Message
 
-app.post('/app/users/:id/posts', (req, res) => {
+app.post('/users/:id/posts', (req, res) => {
 	const user = interface.findUser(parseInt(req.params.id));
     	
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
@@ -141,7 +136,7 @@ app.post('/app/users/:id/posts', (req, res) => {
 
 // Update Message
 
-app.put('/app/users/:id/posts', (req, res) => {
+app.put('/users/:id/posts', (req, res) => {
 	const user = interface.findUser(parseInt(req.params.id));
     	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
@@ -155,7 +150,7 @@ app.put('/app/users/:id/posts', (req, res) => {
 
 // Delete Message
 
-app.delete('/app/users/:id/posts', (req, res) => {
+app.delete('/users/:id/posts', (req, res) => {
 	const user = interface.findUser(parseInt(req.params.id));
     	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
@@ -174,7 +169,7 @@ app.delete('/app/users/:id/posts', (req, res) => {
 });
 // Get All Messages
 
-app.get('/app/users/:id/posts', (req, res) => {
+app.get('/users/:id/posts', (req, res) => {
 	const user = interface.findUser(parseInt(req.params.id));
     	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
@@ -184,7 +179,7 @@ app.get('/app/users/:id/posts', (req, res) => {
 
 // Add Exercise
 
-app.post('/app/users/:id/exercises', (req, res) => {
+app.post('/users/:id/exercises', (req, res) => {
 	const user = interface.findUser(parseInt(req.params.id));
     	
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
@@ -198,7 +193,7 @@ app.post('/app/users/:id/exercises', (req, res) => {
 
 // Update Exercise
 
-app.put('/app/users/:id/exercises', (req, res) => {
+app.put('/users/:id/exercises', (req, res) => {
 	const user = interface.findUser(parseInt(req.params.id));
     if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
@@ -212,7 +207,7 @@ app.put('/app/users/:id/exercises', (req, res) => {
 
 // Delete Exercise
 
-app.put('/app/users/:id/exercises', (req, res) => {
+app.put('/users/:id/exercises', (req, res) => {
 	const user = interface.findUser(parseInt(req.params.id));
     if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
@@ -226,7 +221,7 @@ app.put('/app/users/:id/exercises', (req, res) => {
 
 // Get all Pictures
 
-app.get('/app/users/:id/pictures', (req, res) => {
+app.get('/users/:id/pictures', (req, res) => {
 	const user = interface.findUser(parseInt(req.params.id));
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
@@ -236,7 +231,7 @@ app.get('/app/users/:id/pictures', (req, res) => {
 
 // Add Picture
 
-app.post('/app/users/:id/pictures', (req, res) => {
+app.post('/users/:id/pictures', (req, res) => {
     const user = interface.findUser(parseInt(req.params.id));
     if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
@@ -249,7 +244,7 @@ app.post('/app/users/:id/pictures', (req, res) => {
 
 // Remove Picture
 
-app.delete('/app/users/:id/pictures', (req, res) => {
+app.delete('/users/:id/pictures', (req, res) => {
     const user = interface.findUser(parseInt(req.params.id));
     if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
@@ -264,7 +259,7 @@ app.delete('/app/users/:id/pictures', (req, res) => {
 });
 // Update Picture
 
-app.put('/app/users/:id/pictures', (req, res) => {
+app.put('/users/:id/pictures', (req, res) => {
     const user = interface.findUser(parseInt(req.params.id));
     
     if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
