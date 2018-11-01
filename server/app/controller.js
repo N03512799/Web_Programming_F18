@@ -1,7 +1,7 @@
 const express = require('express');
-const {Interface, User} = require('./model');
+const {API} = require('./model');
 
-var interface = new Interface();
+var api = new API();
 
 const app = express.Router();
  
@@ -9,7 +9,7 @@ const app = express.Router();
 app.use(express.json());
 
 app.get("/", function(req, res){
-    res.send({...interface});
+    res.send({...api});
 });
 
 // Log In Request
@@ -17,8 +17,8 @@ app.get("/", function(req, res){
 app.get('/login', (req, res) => {
 	if(!req.body.email || !req.body.password) return res.status(400).send('Sorry, something is missing');
 
-	const result = interface.checkLogin(req.body.email, req.body.password);
-	if(result>-1) return res.send(interface.findUser(result));
+	const result = api.checkLogin(req.body.email, req.body.password);
+	if(result>-1) return res.send(api.findUser(result));
 	else return res.status(404).send('User not Found');
 
 });
@@ -26,14 +26,14 @@ app.get('/login', (req, res) => {
 // Get List of all Users
 
 app.get('/users', (req, res) => {
-	res.send(interface);
+	res.send(api);
 });
 
 // Display Individual User Data
 
 app.get('/users/:id', (req, res) => {
 
-	const user = interface.findUser(parseInt(req.params.id));
+	const user = api.findUser(parseInt(req.params.id));
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 	
 	res.send(user);
@@ -43,21 +43,21 @@ app.get('/users/:id', (req, res) => {
 
 app.post('/newUser', (req, res) => {
 	
-	const user = interface.addUser(req.body.f_name, req.body.l_name, req.body.gender, req.body.email, req.body.password);
+	const user = api.addUser(req.body.f_name, req.body.l_name, req.body.gender, req.body.email, req.body.password);
 	res.send(user);	
 })
 
 // Update User information
 
 app.put('/users/:id', (req, res) => {
-	const user = interface.findUser(parseInt(req.params.id));
+	const user = api.findUser(parseInt(req.params.id));
     
     if(!user) res.status(404).send('Sorry, This User Does Not Exist');
 	if(!req.body.email || !req.body.privacy || !req.body.password || !req.body.f_name || !req.body.l_name || !req.body.age || !req.body.height || !req.body.gender) {
-	    // 400 Bad Request
-	    res.status(400).send('Sorry, Something seems to be missing');	
-	    return;
-	};
+	// 400 Bad Request
+	res.status(400).send('Sorry, Something seems to be missing');	
+	return;
+	}
 
 	user.f_name = req.body.f_name;
 	user.l_name = req.body.l_name;
@@ -76,11 +76,11 @@ app.put('/users/:id', (req, res) => {
 
 app.delete('/users/:id', (req, res) => {
 
-	const user = interface.findUser(parseInt(req.params.id));
+	const user = api.findUser(parseInt(req.params.id));
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
-	const index = interface.users.indexOf(user);
-	interface.users.splice(index, 1);
+	const index = api.users.indexOf(user);
+	api.users.splice(index, 1);
 
 	res.send(user);
 	
@@ -90,7 +90,7 @@ app.delete('/users/:id', (req, res) => {
 
 app.get('/users/:id/friends', (req, res) => {
 	
-	const user = interface.findUser(parseInt(req.params.id));
+	const user = api.findUser(parseInt(req.params.id));
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
 	res.send(user.friends);
@@ -99,7 +99,7 @@ app.get('/users/:id/friends', (req, res) => {
 // Add a Friend
 
 app.put('/users/:id/friends', (req, res) => {
-	const user = interface.findUser(parseInt(req.params.id));
+	const user = api.findUser(parseInt(req.params.id));
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
 	user.friends.push(req.body.id);
@@ -110,12 +110,12 @@ app.put('/users/:id/friends', (req, res) => {
 // Remove a Friend
 
 app.delete('/users/:id/friends', (req, res) => {
-	const user = interface.findUser(parseInt(req.params.id));
+	const user = api.findUser(parseInt(req.params.id));
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
 	const index = user.friends.indexOf(req.body.id);
 	if (index > -1) {
-		friends.splice(index, 1);
+		user.friends.splice(index, 1);
 	}
 
 	res.send(user.friends);
@@ -125,76 +125,70 @@ app.delete('/users/:id/friends', (req, res) => {
 // Post Message
 
 app.post('/users/:id/posts', (req, res) => {
-	const user = interface.findUser(parseInt(req.params.id));
-    	
+	const user = api.findUser(parseInt(req.params.id));
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 	if(!req.body.message || !req.body.privacy) return res.status(400).send('Sorry, Something is missing.');
-    	
-	user.addPost(req.body.message, parseInt(req.params.id), interface.currentUser.id, req.body.privacy);
-    	res.send(user.posts);
+	user.addPost(req.body.message, req.body.sentTo, parseInt(req.params.id), req.body.privacy);
+    res.send(user.posts);
 });
 
 // Update Message
 
 app.put('/users/:id/posts', (req, res) => {
-	const user = interface.findUser(parseInt(req.params.id));
-    	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
+	const user = api.findUser(parseInt(req.params.id));
+    if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
-    	const index = user.posts.find(p => p.postID === req.body.postID);
+    const index = user.posts.find(p => p.postID === req.body.postID);
 	
 	if (index>-1){user.posts[index].update(req.body.message, req.body.privacy);}
 	else return res.status(404).send('Sorry, message does not exist');	
 
-    	res.send(user.posts);
+    res.send(user.posts);
 });
 
 // Delete Message
 
 app.delete('/users/:id/posts', (req, res) => {
-	const user = interface.findUser(parseInt(req.params.id));
-    	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
+	const user = api.findUser(parseInt(req.params.id));
+    if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
-    	const index = 0;
+    var index = 0;
 
-   	while(index<user.posts.length){
-        	if(user.posts[index].postID == req.body.postID){
-            		break;
-        	};
-            	index = index + 1; 
-    	};
-    	if(index < user.posts.length){
-        	user.posts.splice(index, 1);
-    	}
-    	res.send(user.posts);
+while(index<user.posts.length){
+        if(user.posts[index].postID == req.body.postID){ break;}
+        index = index + 1; 
+    }
+    if(index < user.posts.length){
+        user.posts.splice(index, 1);
+	}
+    res.send(user.posts);
 });
 // Get All Messages
 
 app.get('/users/:id/posts', (req, res) => {
-	const user = interface.findUser(parseInt(req.params.id));
-    	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
-
-    	res.send(user.posts);
+	const user = api.findUser(parseInt(req.params.id));
+	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
+	res.send(user.posts);
 
 });
 
 // Add Exercise
 
 app.post('/users/:id/exercises', (req, res) => {
-	const user = interface.findUser(parseInt(req.params.id));
-    	
+	const user = api.findUser(parseInt(req.params.id));	
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 	if(!req.body.exerciseID) return res.status(400).send('Sorry, no Exercise Selected');
     
 	user.addExercise(req.body.exerciseID);
 
-    	res.send(user.exercises);
+    res.send(user.exercises);
 });
 
 
 // Update Exercise
 
 app.put('/users/:id/exercises', (req, res) => {
-	const user = interface.findUser(parseInt(req.params.id));
+	const user = api.findUser(parseInt(req.params.id));
     if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
     const index = user.exercises.indexOf(req.body.exerciseID);
@@ -208,7 +202,7 @@ app.put('/users/:id/exercises', (req, res) => {
 // Delete Exercise
 
 app.put('/users/:id/exercises', (req, res) => {
-	const user = interface.findUser(parseInt(req.params.id));
+	const user = api.findUser(parseInt(req.params.id));
     if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
     const index = user.exercises.indexOf(req.body.exerciseID);
@@ -222,7 +216,7 @@ app.put('/users/:id/exercises', (req, res) => {
 // Get all Pictures
 
 app.get('/users/:id/pictures', (req, res) => {
-	const user = interface.findUser(parseInt(req.params.id));
+	const user = api.findUser(parseInt(req.params.id));
 	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
 	res.send(user.pictures);
@@ -232,7 +226,7 @@ app.get('/users/:id/pictures', (req, res) => {
 // Add Picture
 
 app.post('/users/:id/pictures', (req, res) => {
-    const user = interface.findUser(parseInt(req.params.id));
+    const user = api.findUser(parseInt(req.params.id));
     if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
     if (!req.body.url) return res.status(400).send('Please Include a Picture');
@@ -245,7 +239,7 @@ app.post('/users/:id/pictures', (req, res) => {
 // Remove Picture
 
 app.delete('/users/:id/pictures', (req, res) => {
-    const user = interface.findUser(parseInt(req.params.id));
+    const user = api.findUser(parseInt(req.params.id));
     if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
 
     if (!req.body.picture) return res.status(400).send('No Photo Selected');
@@ -260,7 +254,7 @@ app.delete('/users/:id/pictures', (req, res) => {
 // Update Picture
 
 app.put('/users/:id/pictures', (req, res) => {
-    const user = interface.findUser(parseInt(req.params.id));
+    const user = api.findUser(parseInt(req.params.id));
     
     if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
     if (!req.body.picture) return res.status(400).send('No Picture Selected');

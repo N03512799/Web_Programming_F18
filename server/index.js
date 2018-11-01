@@ -1,7 +1,6 @@
 
 const express = require('express');
 const gui = require('./app/controller')
-
 const app = express();
 
 const port = 4848;
@@ -10,8 +9,9 @@ const server = "localhost";
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use("/", express.static(__dirname + "/../client/"));
-app.use("/users", gui);
+app.use("/api", gui);
 
 app.listen(port);
 
+// eslint-disable-next-line no-console
 console.log(`listening on: http://${server}:${port}`);

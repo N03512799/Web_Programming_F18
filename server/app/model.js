@@ -1,9 +1,8 @@
-class Interface{
+class API{
 
     constructor() {
 		this.users = [];
 		this.userCount = 0;
-		this.currentUser = '';
     }
 
     addUser(f_name, l_name, gender, email, password) {
@@ -23,10 +22,7 @@ class Interface{
 	checkLogIn(email, password){
 		const user = this.users.find(u => u.email === email);
 		if(!user) return -1;
-		if(user.password == password){ 
-			this.currentUser = user;	
-			return user.id;
-		} 
+		if(user.password == password){return user.id;} 
 	}
 }
 
@@ -49,16 +45,16 @@ class User {
 		this.posts = [];
 		this.postCount = 0;
 		this.pictureCount = 0;	
-	};
+	}
 
 	setPostID(){
 		return this.postCount++;
-	};
+	}
 
 	addPost(message, sentTo, sentBy, privacy){
 		this.posts.push(new Post(message, sentTo, sentBy, privacy, this.setPostID()));
 
-	};
+	}
 
 	setPicID(){
 		return this.pictureCount++;
@@ -70,7 +66,7 @@ class User {
 
 	addExercise(id){
 		this.exercises.push(new Exercise(id));
-	};
+	}
 
 	
 }
@@ -78,20 +74,21 @@ class User {
 class Post {
 
 	constructor(message, sentTo, sentBy, privacy, postID){
-		message: message;
-		date: Date().getTime();
-		sentTo: sentTo;
-		sentBy: sentBy;
-		postID: postID;
-		status: 'New';
-	};
+		this.message = message;
+		this.date = Date().getTime();
+		this.sentTo = sentTo;
+		this.sentBy = sentBy;
+		this.postID = postID;
+		this.privacy = privacy;
+		this.status = 'New';
+	}
 
 	update(message, privacy){
 		this.message = message;
 		this.date = Date().getTime();
 		this.privacy = privacy;
 		this.status = 'Edited';	
-	};
+	}
 }
 
 class Exercise {
@@ -100,7 +97,7 @@ class Exercise {
 		this.id = id;
 		this.tracker = [];
 		this.weight = 0;
-	};
+	}
 
 	update(reps, sets){
 		this.tracker.push(new CompletedExercise(reps, sets, this.weight));
@@ -114,7 +111,7 @@ class Exercise {
 class CompletedExercise {
 
 	constructor(reps, sets, weight){
-		this.reps = rep;
+		this.reps = reps;
 		this.sets = sets;
 		this.weight = weight;
 		this.caloriesUsed = 0;
@@ -139,5 +136,5 @@ class Picture {
 }
 
 module.exports = {
-    Interface, User, Post, Exercise, CompletedExercise, Picture
+    API, User, Post, Exercise, CompletedExercise, Picture
 }
