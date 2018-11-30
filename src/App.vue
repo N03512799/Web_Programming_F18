@@ -1,13 +1,3 @@
-<template>
-  <div id="app" class="container">
-    <div class="display-3">
-      <img alt="Vue logo" src="./assets/logo.png" id="logo">
-      Exercise App
-    </div>
-    <Nav />
-    <router-view/>
-  </div>
-</template>
 
 <style lang="scss">
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
