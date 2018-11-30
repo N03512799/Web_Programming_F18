@@ -5,11 +5,11 @@
                 <router-link class="nav-link" exact-active-class="active" to="/">Home</router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" exact-active-class="active" to="/newUser">newUser</router-link>
+                <router-link class="nav-link" exact-active-class="active" to="/newUser">New User</router-link>
             </li>
-            <!--li class="nav-item">
-                <router-link class="nav-link" exact-active-class="active" to="/play">Play</router-link>
-            </li-->
+            <li class="nav-item">
+                <router-link class="nav-link" exact-active-class="active" to="/profile">Profile</router-link>
+            </li>
         </ul>
     </nav>
 </template>

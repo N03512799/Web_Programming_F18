@@ -1,4 +1,12 @@
 <template>
+<div>  
+  <div class="jumbotron text-center bg-info text-white">
+    <div class="display-3">
+      <img alt="Vue logo" src="@/assets/logo.png" id="logo">
+      Welcome
+    </div>
+  </div>
+<div class="container">
 <form>
   <div class="form-row">
     <div class="form-group col-md-6">
@@ -43,6 +51,10 @@
       </label>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
+  <div class="form-group row justify-content-center">
+      <button type="submit" class="btn btn-primary">Create Profile</button>
+  </div>
 </form>
+</div>
+</div>
 </template>
