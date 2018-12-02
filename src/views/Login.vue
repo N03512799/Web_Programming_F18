@@ -6,7 +6,7 @@
             Exercise App
           </div>
       </div>
-  <form class="text-right" action='/app/users' method="GET">
+  <form class="text-right">
     <div class="form-group row justify-content-center">
       <div class="col-md-6 ">
         <input type="email" class="form-control" id="email" name="email" placeholder="Email">
@@ -37,14 +37,9 @@ export default {
 
   methods: {
     login(){
-
       api.Login(document.getElementById("email").value, document.getElementById("password").value)
         .then(x=> console.log(x));
-    },
-    playerId(){
-      return api.playerId;
-    }
-    
+    }  
   }
 }
 </script>

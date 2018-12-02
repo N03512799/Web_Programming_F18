@@ -13,7 +13,7 @@
   </div>
 <div class="container mt-5">
 <hr class="mx-5">
-<form action="/app/users" method="POST" class="mt-5">
+<form class="mt-5">
   <div class="form-row">
     <div class="form-group col-md-6 justify-content-start">
       <div class="text-danger">
@@ -42,27 +42,29 @@
       </div>
     </div>
   </div>
-  <div class="form-group row justify-content-center">
-    <label for="gender" class="inline text-danger mx-2">Gender*: </label>
-    <div class="form-check-inline" id="gender">
-      <input class="form-check-input" type="radio" name="gender" id="male" value="option1" checked>
-      <label class="form-check-label" for="male">
-        Male
-      </label>
-    </div>
-    <div class="form-check-inline">
-      <input class="form-check-input" type="radio" name="gender" id="female" value="option2">
-      <label class="form-check-label" for="female">
-        Female
-      </label>
-    </div>
+  <div class="row justify-content-center" id="gender">
+      <label for="gender" class="inline text-danger mx-2">Gender*: </label>
+      <div class="form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" value="male" checked>
+        <label class="form-check-label" for="male">
+          Male
+        </label>
+      </div>
+      <div class="form-check-inline">
+          <input class="form-check-input" type="radio" name="gender" value="female">
+          <label class="form-check-label" for="female">
+            Female
+          </label>
+      </div>
   </div>
   <hr class="mx-5">
   <div class="text-center text-danger mb-4">
     *Required Information
   </div>
   <div class="form-group row justify-content-center">
-      <button type="submit" class="btn btn-primary mx-2">Get Started</button>
+      <button type="button" class="btn btn-primary mx-2" @click.prevent="clicker()">
+        Get Started
+      </button>
       <button type="button" class="btn btn-danger mx-2" onclick="window.location.href='/'">Go Back</button>
   </div>
 </form>
@@ -73,19 +75,9 @@
 import * as api from '@/services/api_access';
 
 export default {
-  data(){
-    return {
-      state: {
-        f_name: "",
-        l_name: "",
-        email: "",
-        password: "",
-        gender: ""
-      }
-    }
-  },
-  methods: {
 
+  methods: {
+  
   }
 }
 </script>
