@@ -6,7 +6,7 @@
             Exercise App
           </div>
       </div>
-  <form class="text-right" action='/' method="GET">
+  <form class="text-right" action='/app/users' method="GET">
     <div class="form-group row justify-content-center">
       <div class="col-md-6 ">
         <input type="email" class="form-control" id="email" name="email" placeholder="Email">
@@ -19,7 +19,7 @@
     </div>
     <div class="form-group row justify-content-center">
       <div class="col-xs-1 px-2">
-        <button type="submit" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" id="submit" @click.prevent="login()">
           Sign in
         </button>
       </div>
@@ -30,5 +30,22 @@
 </form>  
     </div>
 </template>
+<script>
+import * as api from '@/services/api_access';
 
+export default {
+
+  methods: {
+    login(){
+
+      api.Login(document.getElementById("email").value, document.getElementById("password").value)
+        .then(x=> console.log(x));
+    },
+    playerId(){
+      return api.playerId;
+    }
+    
+  }
+}
+</script>
 

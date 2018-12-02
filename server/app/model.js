@@ -19,10 +19,14 @@ class API{
 		return this.userCount++;
 	}
 
+// Validates User login
+
 	checkLogIn(email, password){
 		const user = this.users.find(u => u.email === email);
-		if(!user) return -1;
-		if(user.password == password){return user.id;} 
+		if(!user) return null;
+
+		if(user.password === password) return user;
+		else return null; 
 	}
 }
 

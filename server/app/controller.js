@@ -1,6 +1,6 @@
 const express = require('express');
-const {API, User} = require('./model');
-
+const {API} = require('./model');
+const bodyParser = require('body-parser');
 
 var api = new API();
 
@@ -8,6 +8,7 @@ const app = express.Router();
 
 // allow JSON parsing 
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", function(req, res){
 	res.send({...api});
@@ -31,10 +32,16 @@ app.get('/users/:id', (req, res) => {
 });
 
 // Add new User
+app.post('/users/new', (req, res) => {
+	const user = api.addUser(req.body.f_name, req.body.l_name, req.body.gender, req.body.email, req.body.password)
+	res.send(user);
+})
+
 
 app.post('/users', (req, res) => {
-	const user = api.addUser(req.body.f_name, req.body.l_name, req.body.gender, req.body.email, req.body.password);
-	res.send(user);	
+	const user = api.checkLogIn(req.body.email, req.body.password);
+	if (user===null) return res.status(404).send('Sorry, This User Does Not Exist');
+	res.send(user);
 })
 
 // Update User information
