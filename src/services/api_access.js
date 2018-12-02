@@ -9,13 +9,6 @@ export function GetState(){
     return myFetch(api_root + "/");
 }
 
-/*export function FlipPicture(){
-    return postData(api_root + "/picture", {})
-    .then(function(response) {
-        return response.json();
-      })
-}
-*/
 export function login(f_name, l_name, email, password, gender){
     return myFetch(api_root + `/users`, {f_name, l_name, email, password, gender})
 }

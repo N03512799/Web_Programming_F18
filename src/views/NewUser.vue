@@ -13,7 +13,7 @@
   </div>
 <div class="container mt-5">
 <hr class="mx-5">
-<form action="/profile" method="get" class="mt-5">
+<form action="/app/users" method="POST" class="mt-5">
   <div class="form-row">
     <div class="form-group col-md-6 justify-content-start">
       <div class="text-danger">
@@ -62,7 +62,7 @@
     *Required Information
   </div>
   <div class="form-group row justify-content-center">
-      <button type="submit" class="btn btn-primary mx-2" @click.prevent="login">Get Started</button>
+      <button type="submit" class="btn btn-primary mx-2">Get Started</button>
       <button type="button" class="btn btn-danger mx-2" onclick="window.location.href='/'">Go Back</button>
   </div>
 </form>
@@ -86,9 +86,6 @@ export default {
   },
   methods: {
 
-    login(){
-      api.login()
-    }
   }
 }
 </script>

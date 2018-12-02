@@ -6,7 +6,7 @@
             Exercise App
           </div>
       </div>
-  <form class="text-right" action='/users' method="POST">
+  <form class="text-right" action='/' method="GET">
     <div class="form-group row justify-content-center">
       <div class="col-md-6 ">
         <input type="email" class="form-control" id="email" name="email" placeholder="Email">
