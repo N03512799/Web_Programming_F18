@@ -1,20 +1,22 @@
 const express = require('express');
-const {API} = require('./model');
+const {API, User} = require('./model');
+const bodyParser = require('body-parser');
 
 var api = new API();
 
 const app = express.Router();
- 
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 // allow JSON parsing 
 app.use(express.json());
 
 app.get("/", function(req, res){
-    res.send({...api});
+	res.send({...api});
+	console.log("success");
 });
 
 // Log In Request
 
-app.get('/login', (req, res) => {
+app.post('/login', (req, res) => {
 	if(!req.body.email || !req.body.password) return res.status(400).send('Sorry, something is missing');
 
 	const result = api.checkLogin(req.body.email, req.body.password);
@@ -25,7 +27,7 @@ app.get('/login', (req, res) => {
 
 // Get List of all Users
 
-app.get('/users', (req, res) => {
+app.get('/users', urlencodedParser, (req, res) => {
 	res.send(api);
 });
 
@@ -41,10 +43,10 @@ app.get('/users/:id', (req, res) => {
 
 // Add new User
 
-app.post('/newUser', (req, res) => {
-	
-	const user = api.addUser(req.body.f_name, req.body.l_name, req.body.gender, req.body.email, req.body.password);
-	res.send(user);	
+app.post('/users', urlencodedParser, (req, res) => {
+	res.send(req.body);	
+//	const user = api.addUser(req.body.f_name, req.body.l_name, req.body.gender, req.body.email, req.body.password);
+//	res.send(user);	
 })
 
 // Update User information

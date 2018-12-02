@@ -62,10 +62,33 @@
     *Required Information
   </div>
   <div class="form-group row justify-content-center">
-      <button type="submit" class="btn btn-primary mx-2">Get Started</button>
+      <button type="submit" class="btn btn-primary mx-2" @click.prevent="login">Get Started</button>
       <button type="button" class="btn btn-danger mx-2" onclick="window.location.href='/'">Go Back</button>
   </div>
 </form>
 </div>
 </div>
 </template>
+<script>
+import * as api from '@/services/api_access';
+
+export default {
+  data(){
+    return {
+      state: {
+        f_name: "",
+        l_name: "",
+        email: "",
+        password: "",
+        gender: ""
+      }
+    }
+  },
+  methods: {
+
+    login(){
+      api.login()
+    }
+  }
+}
+</script>

@@ -3,6 +3,7 @@ class API{
     constructor() {
 		this.users = [];
 		this.userCount = 0;
+		console.log("success");
     }
 
     addUser(f_name, l_name, gender, email, password) {

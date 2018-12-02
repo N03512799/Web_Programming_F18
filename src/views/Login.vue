@@ -6,15 +6,15 @@
             Exercise App
           </div>
       </div>
-  <form class="text-right">
+  <form class="text-right" action='/users' method="POST">
     <div class="form-group row justify-content-center">
       <div class="col-md-6 ">
-        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
       </div>
     </div>
     <div class="form-group row justify-content-center">
       <div class="col-md-6">
-        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
       </div>
     </div>
     <div class="form-group row justify-content-center">
@@ -30,3 +30,5 @@
 </form>  
     </div>
 </template>
+
+
