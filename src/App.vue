@@ -15,9 +15,11 @@
 <script>
 // @ is an alias to /src
 import Nav from '@/components/Nav.vue'
+import cardio from './assets/cardio.jpg'
 
 export default {
   name: 'home',
+  cardio: cardio,
   components: {
     Nav
   }

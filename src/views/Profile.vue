@@ -1,22 +1,22 @@
 
 <template>
 <div class= "container-fluid"> 
-	<div class = "row d-fluid">
+	<div class = "row d-fluid inline">
 		<div class="col-lg-3 bg-dark order-2 order-lg-1 m-auto py-4 text-center ">
 			<h3 class="display-4 text-white">Workouts</h3>
 			<hr class="bg-light">
 			<div id="upper carousel" class="carousel slide py-3" data-ride="carousel">
   			<div class="carousel-inner">
     			<div class="carousel-item active pic">
-				    <img class="d-block w-100" :src="cardio" alt="First slide">  						
+				    <img class="d-block w-100" src="@/assets/upper.jpg" alt="First slide">  						
             <div class="overlay"></div>
 					</div>
     			<div class="carousel-item pic">
-      			<img class="d-block w-100" src="C:\Users\sdmit\OneDrive\Documents\Web Programming\Web_Programming_F18\img\workouts\upper1.jpg" alt="Second slide">	
+      			<img class="d-block w-100" src="@/assets/upper1.jpg" alt="Second slide">	
 						<div class="overlay"></div>
 					</div>
           <div class="carousel-item pic">
-      			<img class="d-block w-100" src="C:\Users\sdmit\OneDrive\Documents\Web Programming\Web_Programming_F18\img\workouts\upper2.jpg" alt="Third slide">
+      			<img class="d-block w-100" src="@/assets/upper2.jpg" alt="Third slide">
 						<div class="overlay"></div>
   				</div>
 				</div>
@@ -24,31 +24,31 @@
 			<div id="core carousel" class="carousel slide py-3" data-ride="carousel">
   			<div class="carousel-inner">
     			<div class="carousel-item active pic">
-      			<img class="d-block w-100" src="cardio" alt="First slide">						
+      			<img class="d-block w-100" src="@/assets/core.jpg" alt="First slide"/>						
 						<div class="overlay"></div>
 					</div>
     			<div class="carousel-item pic">
-      			<img class="d-block w-100" src="C:\Users\sdmit\OneDrive\Documents\Web Programming\Web_Programming_F18\img\workouts\core1.jpg" alt="Second slide">
+      			<img class="d-block w-100" src="@/assets/core1.jpg" alt="Second slide">
        			<div class="overlay"></div>
 					</div>
     						<div class="carousel-item pic">
-      							<img class="d-block w-100" src="C:\Users\sdmit\OneDrive\Documents\Web Programming\Web_Programming_F18\img\workouts\core2.jpg" alt="Third slide">						
+      							<img class="d-block w-100" src="@/assets/core2.jpg" alt="Third slide">						
 							      <div class="overlay"></div>
 						</div>
   					</div>
 				</div>
 				<div id="lower carousel" class="carousel slide py-3" data-ride="carousel">
   					<div class="carousel-inner">
-    						<div class="carousel-item active">
-      							<img class="d-block w-100 " src="C:\Users\sdmit\OneDrive\Documents\Web Programming\Web_Programming_F18\img\workouts\lower.jpg" alt="First slide">						
+    						<div class="carousel-item active pic">
+      							<img class="d-block w-100 " src="@/assets/lower.jpg" alt="First slide">						
                     <div class="overlay"></div>
 						    </div>
-    						<div class="carousel-item">
-      							<img class="d-block w-100 " src="C:\Users\sdmit\OneDrive\Documents\Web Programming\Web_Programming_F18\img\workouts\lower1.jpg" alt="Second slide">
+    						<div class="carousel-item pic">
+      							<img class="d-block w-100" src="@/assets/lower1.jpg" alt="Second slide">
        							<div class="overlay"></div>
 						    </div>
-    						<div class="carousel-item">
-      							<img class="d-block w-100 pic" :src="C:\Users\sdmit\OneDrive\Documents\Web Programming\Web_Programming_F18\img\workouts\lower2.jpg" alt="Third slide"/>						
+    						<div class="carousel-item pic">
+      							<img class="d-block w-100" src="@/assets/lower2.jpg" alt="Third slide"/>						
 							      <div class="overlay"></div>
 						</div>
   					</div>
@@ -56,15 +56,15 @@
 				<div id="cardio carousel" class="carousel slide py-4" data-ride="carousel">
   					<div class="carousel-inner">
     						<div class="carousel-item active pic">
-      							<img class="d-block w-100" src="C:\Users\sdmit\OneDrive\Documents\Web Programming\Web_Programming_F18\public\workouts\cardio.jpg" alt="First slide">						
+      							<img class="d-block w-100" src="@/assets/cardio.jpg" alt="First slide">						
 							      <div class="overlay"></div>
 						    </div>
-    						<div class="carousel-item">
-      							<img class="d-block w-100 pic" src="C:\Users\sdmit\OneDrive\Documents\Web Programming\Web_Programming_F18\img\workouts\cardio1.jpg" alt="Second slide">
+    						<div class="carousel-item pic">
+      							<img class="d-block w-100" src="@/assets/cardio1.jpg" alt="Second slide">
        							<div class="overlay"></div>
 						    </div>
-    						<div class="carousel-item">
-      							<img class="d-block w-100 pic" src="C:\Users\sdmit\OneDrive\Documents\Web Programming\Web_Programming_F18\img\workouts\cardio2.jpg" alt="Third slide">						
+    						<div class="carousel-item pic">
+      							<img class="d-block w-100" src="@/assets/cardio2.jpg" alt="Third slide">						
 							      <div class="overlay"></div>
 						    </div>
   					</div>
