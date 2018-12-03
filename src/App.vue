@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-
+    
 
     <router-view/>
   </div>
@@ -8,6 +8,7 @@
 
 <style lang="scss">
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+
 #logo { height: 50px;}
 </style>
 

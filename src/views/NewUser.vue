@@ -45,13 +45,13 @@
   <div class="row justify-content-center" id="gender">
       <label for="gender" class="inline text-danger mx-2">Gender*: </label>
       <div class="form-check-inline">
-        <input class="form-check-input" type="radio" name="gender" value="male" checked>
+        <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
         <label class="form-check-label" for="male">
           Male
         </label>
       </div>
       <div class="form-check-inline">
-          <input class="form-check-input" type="radio" name="gender" value="female">
+          <input class="form-check-input" type="radio" name="gender" id="female" value="female">
           <label class="form-check-label" for="female">
             Female
           </label>
@@ -62,7 +62,7 @@
     *Required Information
   </div>
   <div class="form-group row justify-content-center">
-      <button type="button" class="btn btn-primary mx-2" @click.prevent="clicker()">
+      <button type="button" class="btn btn-primary mx-2" @click.prevent="createUser()">
         Get Started
       </button>
       <button type="button" class="btn btn-danger mx-2" onclick="window.location.href='/'">Go Back</button>
@@ -77,7 +77,12 @@ import * as api from '@/services/api_access';
 export default {
 
   methods: {
-  
+    createUser(){
+      const male = document.getElementById("male");
+      const female = document.getElementById("female");
+      if(male.checked == true) console.log(male.value);
+      else console.log(female.value);
+    }
   }
 }
 </script>
