@@ -1,7 +1,8 @@
 
 <template>
-<div class= "container-fluid"> 
-	<div class = "row d-fluid">
+<div class= "container-fluid">
+
+	<div class = "row d-fluid border-top border-light">
 		<div class="col-lg-3 bg-dark order-2 order-lg-1 p-4 text-center ">
 			<div class="my-4">
       <h3 class="display-4 text-white">Workouts</h3>
@@ -73,7 +74,7 @@
 			</div>
 			<hr class="bg-light">
       </div>
-			<div class="col-lg-6 text-center bg-info order-1 order-lg-2  ">
+			<div class="col-lg-6 text-center bg-light order-1 order-lg-2  ">
         <h1 class="display-2">Profile</h1>
 				<div class="container-fluid">
 					<div class="jumbotron jumbotron-fluid my-4">
@@ -84,22 +85,22 @@
 					</div>
 				</div>
 				<div class="row justify-content-center">
-          <div class=" card bg-info postsContainer my-4 ">
+          <div class=" card bg-light postsContainer my-4 border-dark border-top-0">
             <div class="card-header bg-dark text-white w-100">  
               <h3>Posts</h3>
             </div>
             <div class="card-body bg-light">
-              <div class="w-100 bg-light posts">
+              <div class="w-100 bg-light posts border-bottom border-dark">
 
               </div>
               <div class="w-100 bg-light justify-content-center">
-                <button class="btn btn-primary my-3 w-50">Add Post</button>
+                <button class="btn btn-primary mt-3 w-75">Add Post</button>
               </div>
             </div>
           </div>
 				</div>
 			</div>
-			<div class="col-lg-3 bg-success order-3 p-4 text-center">
+			<div class="col-lg-3 bg-info order-3 p-4 text-center ">
 				<div class="my-4">
         <h3 class="display-4 text-white">Friends</h3>
         <hr class="bg-light">
@@ -138,8 +139,7 @@
   .posts {
     height: 400px;
     overflow-y: scroll;
-  }
-
+  } 
   .postsContainer{
     width: 90%;
   }
