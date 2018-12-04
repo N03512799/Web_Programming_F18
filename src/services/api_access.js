@@ -7,7 +7,7 @@ export function GetUsers(){
 
 export function Login(email, password){
     return myFetch(api_root + `/users`, { email: email, password: password })
-        .then(x=> playerId = x.id);
+        .then(x=> playerId = x.id)
 }
 function myFetch(url = ``, data = null) {
     let options = {

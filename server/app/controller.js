@@ -40,7 +40,7 @@ app.post('/users/new', (req, res) => {
 
 app.post('/users', (req, res) => {
 	const user = api.checkLogIn(req.body.email, req.body.password);
-	if (user===null) return res.status(404).send('Sorry, This User Does Not Exist');
+//	if (user===null) return res.status(404).send('Sorry, This User Does Not Exist');
 	res.send(user);
 })
 

@@ -23,10 +23,10 @@ class API{
 
 	checkLogIn(email, password){
 		const user = this.users.find(u => u.email === email);
-		if(!user) return null;
+		if(!user) return {id: -1};
 
 		if(user.password === password) return user;
-		else return null; 
+		else return {id: -2}; 
 	}
 }
 
