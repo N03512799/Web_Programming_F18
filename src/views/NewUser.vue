@@ -78,10 +78,23 @@ export default {
 
   methods: {
     createUser(){
+      const f_name = document.getElementById("f_name").value;
+      const l_name = document.getElementById("l_name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      api.createUser(f_name, l_name, this.checkGender(), email, password)
+        .then(x => this.checkUser(x))
+    },
+    checkUser(u){
+      if(u.id === -1) alert("User account already exists");
+      else window.location.href='/profile/'+u;
+    },
+    checkGender(){
       const male = document.getElementById("male");
       const female = document.getElementById("female");
-      if(male.checked == true) console.log(male.value);
-      else console.log(female.value);
+      if(male.checked == true) return male.value;
+      else return female.value;
     }
   }
 }

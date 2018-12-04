@@ -19,7 +19,7 @@
     </div>
     <div class="form-group row justify-content-center">
       <div class="col-xs-1 px-2">
-        <button type="button" class="btn btn-primary" id="submit" @click.prevent="login()">
+        <button type="button" class="btn btn-primary" :class="{disabled: playerId() > -1}" id="submit" @click="login()">
           Sign in
         </button>
       </div>
@@ -41,11 +41,12 @@ export default {
         .then(x=> this.checkUser(x));
     },
     checkUser(x){
-      console.log(x);
+//      console.log(this.playerId());
       if(x === -1) alert("The email address entered does not match our records");
       else if(x == -2) alert("The password entered does not match our records");
       else window.location.href='/profile/'+x;
-    }  
+    },
+    playerId: ()=> api.playerId
   }
 }
 </script>

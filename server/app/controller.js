@@ -18,7 +18,7 @@ app.get("/", function(req, res){
 // Get List of all Users
 
 app.get('/users', (req, res) => {
-	res.send(req.query)
+	res.send(api.users)
 });
 
 // Display Individual User Data
@@ -33,6 +33,7 @@ app.get('/users/:id', (req, res) => {
 
 // Add new User
 app.post('/users/new', (req, res) => {
+	
 	const user = api.addUser(req.body.f_name, req.body.l_name, req.body.gender, req.body.email, req.body.password)
 	res.send(user);
 })

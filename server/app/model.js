@@ -6,9 +6,14 @@ class API{
     }
 
     addUser(f_name, l_name, gender, email, password) {
+		if(this.users.find(u => u.email === email) === undefined){	
 			const user = new User(this.setID(), f_name, l_name, gender, email, password)   
 			this.users.push(user);
 			return user;
+		} else{
+			return {id: -1};
+		}
+		
 	}
 
 	findUser(id){
