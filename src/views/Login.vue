@@ -38,7 +38,13 @@ export default {
   methods: {
     login(){
       api.Login(document.getElementById("email").value, document.getElementById("password").value)
-        .then(x=> console.log(x));
+        .then(x=> this.checkUser(x));
+    },
+    checkUser(x){
+      console.log(x);
+      if(x === -1) alert("The email address entered does not match our records");
+      else if(x == -2) alert("The password entered does not match our records");
+      else window.location.href='/profile/'+x;
     }  
   }
 }
