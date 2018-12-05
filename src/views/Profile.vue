@@ -94,7 +94,7 @@
 
               </div>
               <div class="w-100 bg-light justify-content-center">
-                <button class="btn btn-primary mt-3 w-75">Add Post</button>
+                <button class="btn btn-primary mt-3 w-75" @click.prevent="checkId">Add Post</button>
               </div>
             </div>
           </div>
@@ -144,3 +144,40 @@
     width: 90%;
   }
 </style>
+<script>
+import * as api from '@/services/api_access';
+
+export default {
+
+
+  created(){
+      api.getUser(this.getUrlParameter('id'))
+        .then(x=> console.log(x))  
+    
+    
+  },
+  methods: {
+    checkId() {
+
+      
+//      console.log(api.getUser(this.getUrlParameter('id')))
+    
+    },
+    getUrlParameter(sParam) {
+      var sPageURL = window.location.search.substring(1),
+          sURLVariables = sPageURL.split('&'),
+          sParameterName,
+          i;
+
+      for (i = 0; i < sURLVariables.length; i++) {
+          sParameterName = sURLVariables[i].split('=');
+
+          if (sParameterName[0] === sParam) {
+              return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+          }
+      }
+    }
+
+  }
+}
+</script>

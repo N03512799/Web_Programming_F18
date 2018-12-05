@@ -41,8 +41,6 @@ class User {
 		this.id = id;
 		this.f_name = f_name;
 		this.l_name = l_name;
-		this.age = '';
-		this.height = '';
 		this.password = password;
 		this.gender = gender;
 		this.email = email;
@@ -69,8 +67,8 @@ class User {
 		return this.pictureCount++;
 	}
 
-	addPicture(url, privacy, isProfile){
-		this.pictures.post(new Picture(url, privacy, isProfile, this.setPicID()));
+	addPicture(url, isProfile){
+		this.pictures.post(new Picture(url, isProfile, this.setPicID()));
 	}
 
 	addExercise(id){
@@ -82,22 +80,15 @@ class User {
 
 class Post {
 
-	constructor(message, sentTo, sentBy, privacy, postID){
+	constructor(message, sentTo, sentBy, postID){
 		this.message = message;
 		this.date = Date().getTime();
 		this.sentTo = sentTo;
 		this.sentBy = sentBy;
 		this.postID = postID;
-		this.privacy = privacy;
-		this.status = 'New';
+
 	}
 
-	update(message, privacy){
-		this.message = message;
-		this.date = Date().getTime();
-		this.privacy = privacy;
-		this.status = 'Edited';	
-	}
 }
 
 class Exercise {

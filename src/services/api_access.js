@@ -1,7 +1,7 @@
 const api_root = "http://localhost:80/app";
 export let playerId = -1;
 
-export function GetUsers(){
+export function GetState(){
     return myFetch(api_root + "/");
 }
 
@@ -13,6 +13,11 @@ export function Login(email, password){
 export function createUser(f_name, l_name, gender, email, password){
     return myFetch(api_root + `/users/new`, {f_name: f_name, l_name: l_name, gender: gender, email: email, password: password})
         .then(x=> playerId = x.id)
+}
+
+export function getUser(id){
+    const user = myFetch(api_root+"/users/"+id);
+        return user;
 }
 
 function myFetch(url = ``, data = null) {

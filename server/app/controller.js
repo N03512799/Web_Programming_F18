@@ -25,9 +25,8 @@ app.get('/users', (req, res) => {
 
 app.get('/users/:id', (req, res) => {
 
-	const user = api.findUser(parseInt(req.params.id));
-	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');
-	
+	const user = api.findUser(req.params.id);
+	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');	
 	res.send(user);
 });
 
