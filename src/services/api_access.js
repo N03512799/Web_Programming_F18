@@ -16,7 +16,7 @@ export function createUser(f_name, l_name, gender, email, password){
 }
 
 export function getUser(id){
-    const user = myFetch(api_root+"/users/"+id);
+    const user = myFetch(api_root+`/users/${id}`);
         return user;
 }
 

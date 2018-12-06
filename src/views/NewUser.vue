@@ -87,8 +87,8 @@ export default {
         .then(x => this.checkUser(x))
     },
     checkUser(u){
-      if(u.id === -1) alert("User account already exists");
-      else window.location.href='/profile/'+u;
+      if(u === -1) alert("User account already exists");
+      else window.location.href='/profile/?id='+u;
     },
     checkGender(){
       const male = document.getElementById("male");
