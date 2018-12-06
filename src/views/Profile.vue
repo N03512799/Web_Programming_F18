@@ -299,7 +299,7 @@ export default {
 
   created(){
 		
-	
+		
 		
   },
   methods: {
