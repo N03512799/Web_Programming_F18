@@ -299,7 +299,7 @@ export default {
 
   created(){
 		
-		
+		console.log($route.params.id);
 		
   },
   methods: {
