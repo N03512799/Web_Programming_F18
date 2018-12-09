@@ -15,20 +15,23 @@ app.get("/", function(req, res){
 	
 });
 
+// Display Individual User Data
+
+app.get(`/users/find/:id`, (req, res, next) => {
+	const user = api.findUser(req.params.id);
+	res.send(user)
+	
+//	const user = api.findUser(parseInt(req.params.id));
+//	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');	
+//	res.send({id: req.param.id});
+});
+
 // Get List of all Users
 
 app.get('/users', (req, res) => {
 	res.send(api.users)
 });
 
-// Display Individual User Data
-
-app.get('/users/:id', (req, res) => {
-
-	const user = api.findUser(req.params.id);
-	if(!user) return res.status(404).send('Sorry, This User Does Not Exist');	
-	res.send(user);
-});
 
 // Add new User
 app.post('/users/new', (req, res) => {

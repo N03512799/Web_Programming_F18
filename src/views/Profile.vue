@@ -299,7 +299,8 @@ export default {
 
   created(){
 		
-		console.log($route.params.id);
+		api.getUser(this.$route.params.id)
+			.then(x=> console.log(x))
 		
   },
   methods: {

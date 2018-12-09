@@ -1,3 +1,5 @@
+import { runInNewContext } from "vm";
+
 const api_root = "http://localhost:80/app";
 export let playerId = -1;
 
@@ -16,8 +18,10 @@ export function createUser(f_name, l_name, gender, email, password){
 }
 
 export function getUser(id){
-    const user = myFetch(api_root+`/users/${id}`);
-        return user;
+    const user = myFetch(api_root + `/users/find/${id}`)
+   return user;
+      
+//    return {id: userId};
 }
 
 function myFetch(url = ``, data = null) {

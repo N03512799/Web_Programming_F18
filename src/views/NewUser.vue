@@ -88,7 +88,7 @@ export default {
     },
     checkUser(u){
       if(u === -1) alert("User account already exists");
-      else window.location.href='/profile/?id='+u;
+      else window.location.href='/profile/'+u;
     },
     checkGender(){
       const male = document.getElementById("male");
