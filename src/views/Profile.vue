@@ -77,13 +77,10 @@
 			<hr class="bg-light">
       </div>
 			<div class="col-lg-6 text-center bg-light order-1 order-lg-2  ">
-        <h1 class="display-2">Profile</h1>
+        <h1 class="display-3">{{user.f_name}} {{user.l_name}}</h1>
 				<div class="container-fluid">
-					<div class="jumbotron jumbotron-fluid my-4">
-                <div class="container">
-                  <h1 class="display-4">Fluid jumbotron</h1>
-                  <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-                </div>
+					<div class="card my-4 h-400 bg-lightGrey">
+						<img class="d-block w-100 h-max400" src="@/assets/defaultUser.png" alt="Profile Image">
 					</div>
 				</div>
 				<div class="row justify-content-center">
@@ -109,7 +106,7 @@
 				<div class="row my-3">
 					<div class="col-4">
 						<div class="card bg-dark pic">
-							<img class="d-block w-100" src="" alt="First slide">					
+							<img class="d-block w-100" src="@/assets/defaultUser.jpg" alt="First Friend">					
 						</div>				
 					</div>
 					<div class="col-4">
@@ -290,17 +287,25 @@
 	.h-400{
 		height: 400px;
 	}
-
+	.h-max400{
+		max-height: 400px;
+	}
 	</style>
 <script>
 import * as api from '@/services/api_access';
 
 export default {
 
+	data(){
+		return {
+			user: {}
+		}
+	},
   created(){
 		
 		api.getUser(this.$route.params.id)
-			.then(x=> console.log(x))
+			.then(x=> this.user = x)
+				.then(x=> console.log(x))
 		
   },
   methods: {

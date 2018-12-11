@@ -12,7 +12,7 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <router-link class="nav-link" exact-active-class="active" to="/profile">Home</router-link>
+        <router-link class="nav-link" exact-active-class="active" to="/profile/">Home</router-link>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -44,7 +44,7 @@ class User {
 		this.password = password;
 		this.gender = gender;
 		this.email = email;
-		this.profileImage = '';
+		this.profileImage = "";
 		this.privacy = 'public';
 		this.pictures = [];
         this.friends = [];

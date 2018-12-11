@@ -44,7 +44,7 @@ export default {
 //      console.log(this.playerId());
       if(x === -1) alert("The email address entered does not match our records");
       else if(x == -2) alert("The password entered does not match our records");
-      else window.location.href='/profile/?id='+x;
+      else window.location.href='/profile/'+x;
     },
     playerId: ()=> api.playerId
   }
