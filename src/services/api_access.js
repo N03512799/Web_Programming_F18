@@ -24,6 +24,10 @@ export function getUser(id){
 //    return {id: userId};
 }
 
+export function getResults(search){
+    return myFetch(api_root + `/findResults`, {search: search})
+}
+
 function myFetch(url = ``, data = null) {
     let options = {
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached

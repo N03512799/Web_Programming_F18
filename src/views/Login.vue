@@ -33,6 +33,7 @@
 <script>
 import * as api from '@/services/api_access';
 
+
 export default {
 
   methods: {

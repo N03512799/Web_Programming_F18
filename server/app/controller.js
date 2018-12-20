@@ -32,6 +32,11 @@ app.get('/users', (req, res) => {
 	res.send(api.users)
 });
 
+app.post('/findResults', (req, res) => {
+	const results = {results: req.body.search.length}
+	res.send(api.users);
+});
+
 
 // Add new User
 app.post('/users/new', (req, res) => {

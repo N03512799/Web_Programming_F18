@@ -3,6 +3,13 @@ class API{
     constructor() {
 		this.users = [];
 		this.userCount = 0;
+		this.autocomplete = [
+			"@gmail.com",
+			"@yahoo.com",
+			"@hotmail.com",
+			"Seraphim",
+			"Dmitrieff"
+		]
     }
 
     addUser(f_name, l_name, gender, email, password) {
@@ -14,6 +21,21 @@ class API{
 			return {id: -1};
 		}
 		
+	}
+
+	addAutoItem(formData){
+		this.autocomplete.push(formData);
+	}
+
+	getAutoItem(userInput){
+		const len = userInput.length;
+		results = [];
+		for(var i=0;i<this.autocomplete.length;i++){
+			if(this.autocomplete[i].substring(0,len) == userInput){
+				results.push(this.autocomplete[i])
+			}
+		}
+		return {results: results}
 	}
 
 	findUser(id){
